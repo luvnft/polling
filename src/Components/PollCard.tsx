@@ -1,5 +1,6 @@
 import { SimplePool } from "nostr-tools";
 import ReplyPoll from "./ReplyPoll";
+import PollCardReplyTemp from "./PollCardReplyTemp";
 
 interface Props {
    pool: SimplePool;
@@ -53,6 +54,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                   </li>
                ))}
          </ul>
+         <PollCardReplyTemp event={event} pool={pool}/>
          <ReplyPoll event={event} pool={pool}/>
       </div>
    )

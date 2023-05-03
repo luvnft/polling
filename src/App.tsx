@@ -53,7 +53,7 @@ function App() {
     // the pool will be null
     if (!pool) return;
 
-    // subscribe to nip 78 kind
+    // subscribe to nip 1 kind
     // pool automatically deduplicates relay events
     const sub = pool.sub(RELAYS, [{
       kinds: [1],
