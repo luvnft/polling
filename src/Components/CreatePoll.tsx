@@ -11,6 +11,7 @@ interface Props {
 export default function CreatePoll({ pool, events, metadata }: Props) {
    const [input, setInput] = useState("");
 
+   
    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
@@ -19,19 +20,12 @@ export default function CreatePoll({ pool, events, metadata }: Props) {
          return;
       }
 
-      // _testBaseEvent = {
-      //    content: input,
-      //    created_at: Math.round(Date.now() / 1000),
-      //    kind: 30078,
-      //    tags: [["d", "aitc/polling/v1"]],
-      // }
-      
       // Construct the event object
       const _baseEvent = {
          content: input,
          created_at: Math.round(Date.now() / 1000),
-         kind: 30078,
-         tags: [["d", "aitc/polling/v1"]],
+         kind: 1,
+         tags: [["t", "aitc/polling/v1"]],
       } as EventTemplate;
 
       // Sign this event (allow the user to sign it with their private key)
@@ -65,22 +59,22 @@ export default function CreatePoll({ pool, events, metadata }: Props) {
    };
 
    return (
-      <div>
-         <h2 className="text-h3 text-white mb-12">What's In Your Mind??</h2>
-         <form onSubmit={onSubmit}>
-            <textarea
-               placeholder="Write your note here..."
-               className="w-full p-12 rounded"
-               value={input}
-               onChange={(e) => setInput(e.target.value)}
-               rows={6}
-            />
-            <div className="flex justify-end">
-               <button className="bg-violet-500 px-16 py-4 rounded-md font-bold hover:bg-violet-600 active:scale-90">
-                  Publish
-               </button>
-            </div>
-         </form>
-      </div>
-   );
-}
+         <div>
+            <h2 className="text-h3 text-white mb-12">What's In Your Mind??</h2>
+            <form onSubmit={onSubmit}>
+               <textarea
+                  placeholder="Write your note here..."
+                  className="w-full p-12 rounded-md"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  rows={6}
+               />
+               <div className="flex justify-end">
+                  <button className="bg-violet-500 px-16 py-4 rounded-md font-bold hover:bg-violet-600 active:scale-90">
+                     Publish
+                  </button>
+               </div>
+            </form>
+         </div>
+      );
+   }

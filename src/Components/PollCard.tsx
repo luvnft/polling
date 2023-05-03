@@ -1,4 +1,12 @@
+import { SimplePool } from "nostr-tools";
+import ReplyPoll from "./ReplyPoll";
+
 interface Props {
+   pool: SimplePool;
+   event: {
+      id: string;
+      pubkey: string;
+   };
    content: string;
    user: {
       name: string;
@@ -9,7 +17,7 @@ interface Props {
    hashtags: string[]
 }
 
-export default function PollCard({ content, user, created_at, hashtags }: Props) {
+export default function PollCard({ content, user, created_at, hashtags, pool, event }: Props) {
    return (
       <div className="rounded p-16 border border-gray-600 bg-gray-700 flex flex-col gap-16 break-words">
          <div className="flex gap-12 items-center overflow-hidden">
@@ -45,6 +53,7 @@ export default function PollCard({ content, user, created_at, hashtags }: Props)
                   </li>
                ))}
          </ul>
+         <ReplyPoll event={event} pool={pool}/>
       </div>
    )
 }

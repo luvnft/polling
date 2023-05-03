@@ -56,9 +56,9 @@ function App() {
     // subscribe to nip 78 kind
     // pool automatically deduplicates relay events
     const sub = pool.sub(RELAYS, [{
-      kinds: [30078],
+      kinds: [1],
       limit: 100,
-      "#d": ["aitc/polling/v1"]
+      "#t": ["aitc/polling/v1"]
     }])
 
     // on subscribtion get event and log it
@@ -118,7 +118,7 @@ function App() {
   return (
     <div className="flex flex-col gap-16">
       <CreatePoll pool={pool} events={events} metadata={metadata}/>
-      <PollList events={events} metadata={metadata} />
+      <PollList pool={pool} events={events} metadata={metadata} />
     </div>
   )
 }
