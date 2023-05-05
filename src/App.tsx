@@ -1,10 +1,15 @@
 import { Event, SimplePool, } from "nostr-tools";
 import { useEffect, useRef, useState } from 'react';
 import './App.css'
-import PollList from "./Components/PollList";
 import { insertEventIntoDescendingList } from "./utils/helperFunctions";
 import { useDebounce } from "use-debounce";
+
+
+// component imports 
 import CreatePoll from "./Components/CreatePoll";
+import PollList from "./Components/PollList";
+import Header from "./Components/Header";
+
 
 // define relays
 export const RELAYS = [
@@ -117,6 +122,7 @@ function App() {
 
   return (
     <div className="flex flex-col gap-16">
+      <Header />
       <CreatePoll pool={pool} events={events} metadata={metadata}/>
       <PollList pool={pool} events={events} metadata={metadata} />
     </div>

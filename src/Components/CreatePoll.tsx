@@ -11,7 +11,7 @@ interface Props {
 export default function CreatePoll({ pool, events, metadata }: Props) {
    const [input, setInput] = useState("");
 
-   
+
    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
@@ -25,7 +25,7 @@ export default function CreatePoll({ pool, events, metadata }: Props) {
          content: input,
          created_at: Math.round(Date.now() / 1000),
          kind: 1,
-         tags: [["t", "aitc/polling/v1"]],
+         tags: [["t", "aitc/polling/v1"], ["t", "poll"]],
       } as EventTemplate;
 
       // Sign this event (allow the user to sign it with their private key)
@@ -59,22 +59,21 @@ export default function CreatePoll({ pool, events, metadata }: Props) {
    };
 
    return (
-         <div>
-            <h2 className="text-h3 text-white mb-12">What's In Your Mind??</h2>
-            <form onSubmit={onSubmit}>
-               <textarea
-                  placeholder="Write your note here..."
-                  className="w-full p-12 rounded-md"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  rows={6}
-               />
-               <div className="flex justify-end">
-                  <button className="bg-violet-500 px-16 py-4 rounded-md font-bold hover:bg-violet-600 active:scale-90">
-                     Publish
-                  </button>
-               </div>
-            </form>
-         </div>
-      );
-   }
+      <div className="bg-white shadow-md p-6 rounded-lg">
+         <form onSubmit={onSubmit}>
+            <textarea
+               placeholder="What's on your mind?"
+               className="w-full resize-none border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 text-gray-700 leading-tight"
+               value={input}
+               onChange={(e) => setInput(e.target.value)}
+               rows={5}
+            />
+            <div className="flex justify-end mt-4">
+               <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+                  Post
+               </button>
+            </div>
+         </form>
+      </div>
+   );
+}
