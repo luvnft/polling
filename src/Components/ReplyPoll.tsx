@@ -14,7 +14,6 @@ interface Props {
 export default function ReplyPoll({ event, pool }: Props) {
 
    const [pollReply, setPollReply] = useState("");
-   const [pressed, setPressed] = useState(false);
 
    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -63,7 +62,6 @@ export default function ReplyPoll({ event, pool }: Props) {
 
             clearedInput = true;
             setPollReply("");
-            setPressed(false);
          });
 
       } catch (error) {
@@ -74,31 +72,17 @@ export default function ReplyPoll({ event, pool }: Props) {
 
    return (
       <div>
-         {!pressed ?
-            (
-               <button className="bg-violet-500 px-16 py-4 rounded-md font-bold hover:bg-violet-600 active:scale-90" onClick={() => setPressed(true)}>
-                  Reply
-               </button>
-            )
-            :
-            (
-               <div>
-                  <h2 className="text-h3 text-white mb-12">What's In Your Mind??</h2><form onSubmit={onSubmit}>
-                     <textarea
-                        placeholder="Write your note here..."
-                        className="w-full p-12 rounded-md"
-                        value={pollReply}
-                        onChange={(e) => setPollReply(e.target.value)}
-                        rows={6} />
-                     <div className="flex justify-end">
-                        <button className="bg-violet-500 px-16 py-4 rounded-md font-bold hover:bg-violet-600 active:scale-90">
-                           Reply
-                        </button>
-                     </div>
-                  </form>
-               </div>
-            )
-         }
+         <form onSubmit={onSubmit}>
+            <textarea
+               placeholder="Write your note here..."
+               className="border border-gray-300 rounded-lg w-full p-2 mb-4"
+               value={pollReply}
+               onChange={(e) => setPollReply(e.target.value)}
+               rows={6} />
+            <button className="bg-blue-500 text-white py-2 px-4 rounded">
+               Reply
+            </button>
+         </form>
       </div>
    )
 }
