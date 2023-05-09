@@ -34,7 +34,7 @@ export default function MajorityPoll({ event, pool }: Props) {
          content: `${agreeCount},${disagreeCount}`,
          created_at: Math.round(Date.now() / 1000),
          kind: 30078,
-         tags: [["d", event.id]]
+         tags: [["d", event.id]],
       } as EventTemplate;
 
       try {
