@@ -6,7 +6,6 @@ import tw from 'tailwind-styled-components';
 import { SimplePool } from 'nostr-tools';
 
 // components import
-import PollCardReplyTemp from './PollCardReplyTemp';
 import ReplyPoll from './ReplyPoll';
 
 // Styling for the comment button

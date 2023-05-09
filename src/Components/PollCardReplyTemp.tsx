@@ -13,9 +13,10 @@ interface Props {
 }
 
 export default function PollCardReplyTemp({ pool, event }: Props) {
-
    const [pollReply, setPollReply] = useState<Event[]>([]);
 
+   // TODO: make the key identifier for the map unique
+   
    // query tags with the same id in their e tag and pub key in their p tag
    useEffect(() => {
 
@@ -43,11 +44,12 @@ export default function PollCardReplyTemp({ pool, event }: Props) {
    return (
       <div>
          {
-            pollReply.map((event) => (
-               <div key={event.id} className="flex flex-col gap-16">
-                  <p>{event.content}</p>
+            pollReply.map((events) => (
+               // make key unique other than Math.random()
+               <div key={Math.random()} className="flex flex-col gap-16">
+                  <p>{events.content}</p>
                   <ul className="flex flex-wrap gap-12">
-                     {event
+                     {events
                         .tags
                         .filter((t) => t[0] === 't')
                         .map(t => t[1])
