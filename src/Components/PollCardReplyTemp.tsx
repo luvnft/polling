@@ -48,20 +48,6 @@ export default function PollCardReplyTemp({ pool, event }: Props) {
                // make key unique other than Math.random()
                <div key={Math.random()} className="flex flex-col gap-16">
                   <p>{events.content}</p>
-                  <ul className="flex flex-wrap gap-12">
-                     {events
-                        .tags
-                        .filter((t) => t[0] === 't')
-                        .map(t => t[1])
-                        .map((hashtag) => (
-                           <li
-                              key={hashtag}
-                              className="bg-gray-300 text-body5 text-gray-900 font-medium rounded-md px-12 py-4"
-                           >
-                              #{hashtag}
-                           </li>
-                        ))}
-                  </ul>
                </div>
             ))
          }

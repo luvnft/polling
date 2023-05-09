@@ -96,46 +96,37 @@ export default function MajorityPoll({ event, pool }: Props) {
    }
 
    return (
-      <div className="w-72 bg-white rounded-lg shadow-md">
-         <div className="p-4">
-            <h2 className="text-lg font-medium text-gray-900">Do you agree?</h2>
-            <div className="flex justify-between items-center mt-4">
-               <div className="flex-1 mr-4">
-                  <div className="flex items-center">
-                     <div className="bg-green-500 h-2 w-1/2 rounded-full mr-2"></div>
-                     <span>{agreePercent}%</span>
-                  </div>
-                  <p className="text-sm text-gray-500">Agree</p>
-               </div>
-               <div className="flex-1">
-                  <div className="flex items-center">
-                     <div className="bg-red-500 h-2 w-1/2 rounded-full mr-2"></div>
-                     <span>{disagreePercent}%</span>
-                  </div>
-                  <p className="text-sm text-gray-500">Disagree</p>
-               </div>
-            </div>
-         </div>
-         <div className="bg-gray-200 h-2 rounded-full">
-            <div className="bg-green-500 h-2 rounded-full" style={{ width: `${agreePercent}%` }}></div>
-            <div className="bg-red-500 h-2 rounded-full" style={{ width: `${disagreePercent}%` }}></div>
-         </div>
-         <div className="flex justify-between items-center px-4 py-2">
+      <div className="w-72">
+         <div className="flex flex-row justify-between items-center px-1 gap-1">
             <form onSubmit={onSubmit}>
                <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                   onClick={() => setAgreeCount((prevCount) => prevCount + 1)}
                >
-                  Agree
+                  <FaThumbsUp />
                </button>
+            </form>
+            <div className='flex flex-col w-full'>
+               <p className='text-xs font-medium text-gray-900'>{agreePercent}% Agree {disagreePercent}% Disagree</p>
+               <div className='h-3 rounded-full w-full bg-red-600'>
+                  <div
+                     style={{ width: `${agreePercent}%` }}
+                     className={`h-full rounded-full bg-green-600`}>
+                  </div>
+               </div>
+            </div>
+            <form onSubmit={onSubmit}>
                <button
                   className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                   onClick={() => setDisagreeCount((prevCount) => prevCount + 1)}
                >
-                  Disagree
+                  <FaThumbsDown />
                </button>
             </form>
+         </div>
+         <div className="p-2">
+            <h2 className="text-sm font-medium items-center text-gray-900">Do you agree?</h2>
          </div>
       </div>
    );

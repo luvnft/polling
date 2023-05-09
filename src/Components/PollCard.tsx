@@ -32,8 +32,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
    }
 
    return (
-      <div className="bg-blue-200 rounded-lg shadow p-4 border-l-4 border-r-4 border-t-2 border-b-2 border-blue-500">
-         {/* hover:bg-blue-300 hover:shadow-md */}
+      <div className="p-4 border-t-2 border-b-2 border-white">
          <div className="user-info flex items-center mb-4">
             <img src={user.image} alt="User Avatar" className="h-8 w-8 rounded-full" />
             <a
@@ -48,10 +47,10 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                {new Date(created_at * 1000).toISOString().split("T")[0]}
             </p>
          </div>
-         <p className="text-gray-700 text-sm">
+         <p className="text-black text-md">
             {content}
          </p>
-         <ul className="flex flex-wrap gap-4">
+         {/* <ul className="flex flex-wrap gap-4">
             {hashtags
                .filter((t) => hashtags.indexOf(t) === hashtags.lastIndexOf(t))
                .map((hashtag) => (
@@ -62,22 +61,23 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                      #{hashtag}
                   </li>
                ))}
-         </ul>
-         <MajorityPoll event={event} pool={pool} />
-         <div className="flex justify-start mt-4">
-            <div className="flex flex-wrap gap-1">
+         </ul> */}
+         <div className="flex flex-row justify-start mt-4">
+            <div className="gap-1">
                <CommentModal event={event} pool={pool} content={content} user={curUser} />
-               <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={() => setLiked(!liked)}>
+               <button className="text-white hover:text-red-300 py-2 px-4 rounded" onClick={() => setLiked(!liked)}>
                   <FaHeart color={`${liked ? "red" : ""}`} />
                </button>
-               <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+               <button className="text-white hover:text-black py-2 px-4 rounded">
                   <FaShare />
                </button>
+            </div>
+            <div>
+               <MajorityPoll event={event} pool={pool} />
             </div>
          </div>
          {/* buttons that we need to have at the end of this is like, comment, share, golden rule agree disagree bar */}
          <PollCardReplyTemp event={event} pool={pool} />
-
       </div >
    )
 }

@@ -91,7 +91,7 @@ function App() {
     pubkeysToFetch.forEach((pubkey) => {
       metadataFetched.current[pubkey] = true;
     })
-    
+
     // get metadata from a user
     const sub = pool.sub(RELAYS, [{
       kinds: [0],
@@ -123,8 +123,10 @@ function App() {
   return (
     <div className="flex flex-col gap-16">
       <Header />
-      <CreatePoll pool={pool} events={events} metadata={metadata}/>
-      <PollList pool={pool} events={events} metadata={metadata} />
+      <CreatePoll pool={pool} events={events} metadata={metadata} />
+      <div className="bg-gray-500">
+        <PollList pool={pool} events={events} metadata={metadata} />
+      </div>
     </div>
   )
 }
