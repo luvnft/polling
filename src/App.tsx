@@ -9,6 +9,7 @@ import { useDebounce } from "use-debounce";
 import CreatePoll from "./Components/CreatePoll";
 import PollList from "./Components/PollList";
 import Header from "./Components/Header";
+import { Metadata } from "./types/nostr";
 
 
 // define relays
@@ -18,13 +19,6 @@ export const RELAYS = [
   "wss://nostr.swiss.enigma.ch",
   "wss://relay.damus.io",
 ];
-
-export interface Metadata {
-  name?: string;
-  about?: string;
-  picture?: string;
-  nip05?: string;
-}
 
 
 function App() {

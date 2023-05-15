@@ -1,6 +1,6 @@
 import { Event, SimplePool, nip19 } from "nostr-tools";
 import PollCard from "./PollCard";
-import { Metadata } from "../App";
+import { Metadata } from "../types/nostr";
 
 interface Props {
    pool: SimplePool;

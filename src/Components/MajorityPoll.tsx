@@ -12,8 +12,6 @@ interface Props {
    pool: SimplePool;
 }
 export default function MajorityPoll({ event, pool }: Props) {
-
-   const [results, setResults] = useState([]);
    const [agreeCount, setAgreeCount] = useState(0);
    const [disagreeCount, setDisagreeCount] = useState(0);
 
@@ -92,8 +90,6 @@ export default function MajorityPoll({ event, pool }: Props) {
 
    }, [])
 
-   const setTags = (tag: [], agree: Boolean) => {
-   }
 
    return (
       <div className="w-72">
