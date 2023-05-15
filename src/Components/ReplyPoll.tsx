@@ -9,9 +9,10 @@ interface Props {
       id: string;
       pubkey: string;
    };
+   toggleMenu: (show: boolean) => void;
 }
 
-export default function ReplyPoll({ event, pool }: Props) {
+export default function ReplyPoll({ event, pool, toggleMenu }: Props) {
 
    const [pollReply, setPollReply] = useState("");
 
@@ -68,6 +69,7 @@ export default function ReplyPoll({ event, pool }: Props) {
          console.log(error)
          alert("User rejected operation");
       }
+      toggleMenu(false);
    }
 
    return (

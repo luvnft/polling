@@ -63,8 +63,8 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                   </li>
                ))}
          </ul> */}
-            <div className="flex flex-row justify-start mt-4">
-               <div className="gap-1">
+            <div className="flex flex-col gap-20 justify-start mt-4">
+               <div className="flex justify-start items-start align-left">
                   <CommentModal event={event} pool={pool} content={content} user={curUser} />
                   <button className="text-white hover:text-red-300 py-2 px-4 rounded" onClick={() => setLiked(!liked)}>
                      <FaHeart color={`${liked ? "red" : ""}`} />

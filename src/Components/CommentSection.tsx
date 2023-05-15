@@ -45,7 +45,7 @@ export default function CommentSection({ pool, event }: Props) {
 
 
    return (
-      <div>
+      <div className='w-full'>
          <h1 className="text-white">Comments</h1>
          <div className='h-64 w-full p-4 overflow-y-scroll'>
             {
