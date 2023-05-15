@@ -78,10 +78,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                </div>
             </div>
          </div >
-         <div className="flex flex-col w-full h-full items-center y-overflow-scroll">
-            <h1 className="text-white">Comments</h1>
-            <CommentSection event={event} pool={pool} />
-         </div>
+         <CommentSection event={event} pool={pool} />
       </div>
    )
 }
