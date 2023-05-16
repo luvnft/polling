@@ -10,9 +10,10 @@ interface Props {
       pubkey: string;
    };
    toggleMenu: (show: boolean) => void;
+   rows: number;
 }
 
-export default function ReplyPoll({ event, pool, toggleMenu }: Props) {
+export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
 
    const [pollReply, setPollReply] = useState("");
 
@@ -77,11 +78,11 @@ export default function ReplyPoll({ event, pool, toggleMenu }: Props) {
          <form onSubmit={onSubmit}>
             <textarea
                placeholder="Write your note here..."
-               className="border border-gray-300 rounded-lg w-full p-2 mb-4"
+               className="border border-gray-300 rounded-lg w-full p-2"
                value={pollReply}
                onChange={(e) => setPollReply(e.target.value)}
-               rows={6} />
-            <button className="bg-blue-500 text-white py-2 px-4 rounded">
+               rows={rows} />
+            <button className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
                Reply
             </button>
          </form>

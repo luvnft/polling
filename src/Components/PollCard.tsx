@@ -32,9 +32,9 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
    }
 
    return (
-      <div className="flex flex-row border-t-2 border-b-2 border-white">
-         <div className="p-4">
-            <div className="user-info flex items-center mb-4">
+      <div className="flex flex-row">
+         <div className="flex flex-col border rounded-md w-1/2 p-4">
+            <div className="flex user-info items-center mb-4">
                <img src={user.image} alt="User Avatar" className="h-8 w-8 rounded-full" />
                <a
                   href={`https://nostr.guru/p/${user.pubkey}`}
@@ -63,7 +63,10 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                   </li>
                ))}
          </ul> */}
-            <div className="flex flex-col gap-20 justify-start mt-4">
+            <div className="flex flex-row justify-start mt-auto">
+               <div>
+                  <MajorityPoll event={event} pool={pool} />
+               </div>
                <div className="flex justify-start items-start align-left">
                   <CommentModal event={event} pool={pool} content={content} user={curUser} />
                   <button className="text-white hover:text-red-300 py-2 px-4 rounded" onClick={() => setLiked(!liked)}>
@@ -72,9 +75,6 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                   <button className="text-white hover:text-black py-2 px-4 rounded">
                      <FaShare />
                   </button>
-               </div>
-               <div>
-                  <MajorityPoll event={event} pool={pool} />
                </div>
             </div>
          </div >

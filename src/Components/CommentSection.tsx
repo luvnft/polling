@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { RELAYS } from '../App';
 import { getProfileDataFromMetaData, insertEventIntoDescendingList } from '../utils/helperFunctions';
 import { useMetadata } from '../utils/use-metadata';
+import ReplyPoll from './ReplyPoll';
 
 
 interface Props {
@@ -45,7 +46,7 @@ export default function CommentSection({ pool, event }: Props) {
 
 
    return (
-      <div className='w-full'>
+      <div className='w-1/2 border rounded-md'>
          <h1 className="text-white">Comments</h1>
          <div className='h-64 w-full p-4 overflow-y-scroll'>
             {
@@ -69,6 +70,7 @@ export default function CommentSection({ pool, event }: Props) {
                ))
             }
          </div>
+         <ReplyPoll pool={pool} event={event} toggleMenu={() => false} rows={1}/>
       </div>
    )
 }

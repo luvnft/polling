@@ -56,7 +56,7 @@ export default function CommentModal({ event, pool, content, user }: Props) {
                <button className="text-gray-600" onClick={() => setModalIsOpen(false)}><AiOutlineCloseCircle/></button>
             </div>
             <p className="text-gray-800 mb-4">{content}</p>
-            <ReplyPoll event={event} pool={pool} toggleMenu={setModalIsOpen}/>
+            <ReplyPoll event={event} pool={pool} toggleMenu={setModalIsOpen} rows={6}/>
          </Modal>
       </>
    );
