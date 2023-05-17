@@ -4,7 +4,7 @@ import { FaHeart, FaShare } from "react-icons/fa";
 import CommentSection from "./CommentSection";
 import CommentModal from "./CommentButton";
 import { useState } from "react";
-import MajorityPoll from "./MajorityPoll";
+import MajorityPoll from "./PostPoll/MajorityPoll";
 
 interface Props {
    pool: SimplePool;
