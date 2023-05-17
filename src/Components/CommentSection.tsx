@@ -65,12 +65,14 @@ export default function CommentSection({ pool, event }: Props) {
                            <p className="ml-2 font-semibold text-gray-700 text-sm">{getProfileDataFromMetaData(metadata, evnt.pubkey).name || nip19.npubEncode(evnt.pubkey)}</p>
                         </a>
                      </div>
-                     <p>{evnt.content}</p>
+                     <div className="text-white">
+                        <p>{evnt.content}</p>
+                     </div>
                   </div>
                ))
             }
          </div>
-         <ReplyPoll pool={pool} event={event} toggleMenu={() => false} rows={1}/>
+         <ReplyPoll pool={pool} event={event} toggleMenu={() => false} rows={1} />
       </div>
    )
 }

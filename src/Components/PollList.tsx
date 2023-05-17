@@ -10,7 +10,7 @@ interface Props {
 
 export default function Poll({ events, metadata, pool }: Props) {
    return (
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-10">
          {
             events.map((event) => (
                <PollCard

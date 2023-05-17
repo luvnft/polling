@@ -24,6 +24,7 @@ interface Props {
 
 export default function PollCard({ content, user, created_at, hashtags, pool, event }: Props) {
 
+   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
    const [liked, setLiked] = useState(false);
    const curUser = {
       name: user.name,
@@ -48,8 +49,11 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                   {new Date(created_at * 1000).toISOString().split("T")[0]}
                </p>
             </div>
-            <p className="text-black text-md">
-               {content}
+            <p className="text-white text-md h-full w-full">
+               {allowedTypes.map((type) => content.includes(type)) ?
+                  <img src={content} alt={content} className="object-contain" />
+                  :
+                  content}
             </p>
             {/* <ul className="flex flex-wrap gap-4">
             {hashtags

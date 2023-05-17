@@ -114,11 +114,12 @@ function App() {
 
   if (!pool) return null;
 
+  // bg-#585858
   return (
     <div className="flex flex-col gap-16">
       <Header />
       <CreatePoll pool={pool} events={events} metadata={metadata} />
-      <div className="bg-gray-500">
+      <div className="rounded-md bg-[#111827]">
         <PollList pool={pool} events={events} metadata={metadata} />
       </div>
     </div>
