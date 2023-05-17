@@ -53,13 +53,13 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
       // if there are pictures, display them
       if (pictures.length > 0) {
          return (
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-3">
                <p className="text-white text-md h-full w-full">
                   {text.join(" ")}
                </p>
                <div className="flex flex-row justify-center">
                   {pictures.map((picture) => (
-                     <img src={picture} alt="Poll Picture" className="h-1/2 w-1/2" />
+                     <img src={picture} alt="Poll Picture" className="scale-25" />
                   ))}
                </div>
             </div>
