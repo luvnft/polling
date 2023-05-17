@@ -1,8 +1,8 @@
 import { SimplePool } from "nostr-tools";
 import { FaHeart, FaShare } from "react-icons/fa";
 // components
-import CommentSection from "./CommentSection";
-import CommentModal from "./CommentButton";
+import CommentSection from "./Comment/CommentSection";
+import CommentModal from "./Comment/CommentButton";
 import { useState } from "react";
 import MajorityPoll from "./PostPoll/MajorityPoll";
 

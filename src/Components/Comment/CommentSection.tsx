@@ -1,9 +1,9 @@
 import { Event, SimplePool, nip19 } from 'nostr-tools';
 import { useEffect, useState } from 'react'
-import { RELAYS } from '../App';
-import { getProfileDataFromMetaData, insertEventIntoDescendingList } from '../utils/helperFunctions';
-import { useMetadata } from '../utils/use-metadata';
-import ReplyPoll from './ReplyPoll';
+import { RELAYS } from '../../App';
+import { getProfileDataFromMetaData, insertEventIntoDescendingList } from '../../utils/helperFunctions';
+import { useMetadata } from '../../utils/use-metadata';
+import ReplyPoll from '../ReplyPoll';
 
 
 interface Props {

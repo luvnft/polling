@@ -6,7 +6,7 @@ import { useDebounce } from "use-debounce";
 
 
 // component imports 
-import CreatePoll from "./Components/CreatePoll";
+import CreatePoll from "./Components/Comment/CreatePoll";
 import PollList from "./Components/PollList";
 import Header from "./Components/Header";
 import { Metadata } from "./types/nostr";

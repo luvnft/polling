@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
-import { RELAYS } from "../App";
-import { Metadata } from "../types/nostr";
-import NostrImg, { UploadResult } from "../upload/Nostrimg";
+import { RELAYS } from "../../App";
+import { Metadata } from "../../types/nostr";
+import NostrImg, { UploadResult } from "../../upload/Nostrimg";
 
 interface Props {
    pool: SimplePool;
