@@ -24,12 +24,53 @@ interface Props {
 
 export default function PollCard({ content, user, created_at, hashtags, pool, event }: Props) {
 
-   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
+   const allowedTypes = ["file.png"];
    const [liked, setLiked] = useState(false);
    const curUser = {
       name: user.name,
       image: user.image,
       date: new Date(created_at * 1000).toISOString().split("T")[0],
+   }
+
+   function displayContent(content: string) {
+      // make string into an array of words
+      const words = content.split(" ");
+      const pictures: string[] = [];
+      const text: string[] = [];
+
+      console.log("Words: ", words)
+
+      // loop through each word and see if it is a picture
+      words.map((word) => {
+         allowedTypes.map((type) => {word.includes(type) ? 
+            pictures.push(word) :
+            text.push(word)})
+      })
+
+      console.log("Pictures: ", pictures)
+      console.log("Text: ", text)
+
+      // if there are pictures, display them
+      if (pictures.length > 0) {
+         return (
+            <div className="flex flex-col">
+               <p className="text-white text-md h-full w-full">
+                  {text.join(" ")}
+               </p>
+               <div className="flex flex-row justify-center">
+                  {pictures.map((picture) => (
+                     <img src={picture} alt="Poll Picture" className="h-1/2 w-1/2" />
+                  ))}
+               </div>
+            </div>
+         )
+      } else {
+         return (
+            <p className="text-white text-md h-full w-full">
+               {content}
+            </p>
+         )
+      }
    }
 
    return (
@@ -50,10 +91,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                </p>
             </div>
             <p className="text-white text-md h-full w-full">
-               {allowedTypes.map((type) => content.includes(type)) ?
-                  <img src={content} alt={content} className="object-contain" />
-                  :
-                  content}
+               {displayContent(content)}
             </p>
             {/* <ul className="flex flex-wrap gap-4">
             {hashtags
