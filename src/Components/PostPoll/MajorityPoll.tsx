@@ -1,7 +1,6 @@
 import { SimplePool, Event, getEventHash, EventTemplate } from 'nostr-tools';
 import React, { useEffect, useState } from 'react'
 import { RELAYS } from "../../App"
-import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import Slider from './PollSlider'
 
 interface Props {
@@ -101,7 +100,7 @@ export default function MajorityPoll({ event, pool }: Props) {
                <div>
                   <button
                      type="submit"
-                     className="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                     className="px-4 py-2 text-sm font-medium text-white border-[#276749] bg-[#5DAE86] hover:bg-[#2F855A] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                      onClick={(() => {
                         setVoteCount(voteCount + 1)
                         setSum(sum + value)

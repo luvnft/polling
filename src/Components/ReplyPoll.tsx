@@ -74,17 +74,21 @@ export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
    }
 
    return (
-      <div>
-         <form onSubmit={onSubmit}>
-            <textarea
-               placeholder="Write your note here..."
-               className="border border-gray-300 rounded-lg w-full p-2"
-               value={pollReply}
-               onChange={(e) => setPollReply(e.target.value)}
-               rows={rows} />
-            <button className="w-full bg-[#5992D4] hover:bg-[#3570D4] text-white py-2 px-4 rounded">
-               Reply
-            </button>
+      <div className="flex-grow">
+         <form className="flex flex-row justify-end" onSubmit={onSubmit}>
+            <div className="w-2/3">
+               <textarea
+                  placeholder="Write your note here..."
+                  className="border border-gray-300 bg-[#F4F7FA] rounded-lg w-full p-2"
+                  value={pollReply}
+                  onChange={(e) => setPollReply(e.target.value)}
+                  rows={rows} />
+            </div>
+            <div>
+               <button className="border border-[#276749] bg-[#5DAE86] hover:bg-[#2F855A] text-white p-2 rounded-lg">
+                  Reply
+               </button>
+            </div>
          </form>
       </div>
    )

@@ -69,9 +69,9 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
    }
 
    return (
-      <div className="flex flex-row border-b border-[#59B7D4] border-b-2 p-2">
+      <div className="flex flex-row border-b border-[#C5E0F6] border-b-2 p-2">
          <div className="flex flex-col rounded-md w-1/2 p-4">
-            <div className="flex border user-info items-center rounded-b-lg p-2 mb-4">
+            <div className="flex w-1/2 border border-[#C5E0F6] bg-[#F4F7FA] user-info items-center rounded-b-lg p-2 mb-4">
                <img src={user.image} alt="User Avatar" className="h-8 w-8 rounded-full" />
                <a
                   href={`https://nostr.guru/p/${user.pubkey}`}

@@ -3,8 +3,9 @@ import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
+//border-[#276749] bg-[#5DAE86] hover:bg-[#2F855A]
 const PrettoSlider = styled(Slider)({
-  color: '#52af77',
+  color: '#5DAE86',
   height: 8,
   '& .MuiSlider-track': {
     border: 'none',

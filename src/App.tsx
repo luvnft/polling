@@ -116,14 +116,34 @@ function App() {
 
   // bg-#585858
   return (
-    <div className="flex flex-col gap-16">
+    <div className="flex flex-col">
       <Header />
       <CreatePoll pool={pool} events={events} metadata={metadata} />
-      <div className="rounded-md bg-[#163C65]">
+      <div className="h-3 bg-gradient-to-r from-[#FBBFCC] via-[#F493B0] via-[#87A4C5] to-[#5DAE86]"></div>
+      {/* <div className="h-20 bg-gradient-to-b from-white via-[#C5E0F6] to-[#2A2C3C]"></div> */}
+      <div className="bg-gradient-to-b from-[#2A2C3C] via-[#332A48] via-[#3F315A] via-[#5077A8] to-[#2A2C3C]">
         <PollList pool={pool} events={events} metadata={metadata} />
       </div>
     </div>
   )
 }
+
+/*
+#2A2C3C - Deep Space
+#332A48 - Nebula Purple
+#3F315A - Galactic Purple
+#3E527F - Midnight Blue
+#5077A8 - Starry Blue
+#87A4C5 - Nebula Sky
+#C5E0F6 - Stellar White
+#F4F7FA - Cosmic Gray
+#FBBFCC - Supernova Pink
+#F493B0 - Celestial Rose
+#5DAE86 - Emerald Green
+#48BB78 - Lush Green
+#38A169 - Forest Green
+#2F855A - Deep Green
+#276749 - Pine Green
+*/
 
 export default App

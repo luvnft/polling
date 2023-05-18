@@ -97,7 +97,7 @@ export default function CreatePoll({ pool, events, metadata }: Props) {
       //       </div>
       //    </form>
       // </div>
-      <div className="bg-white shadow-md p-6 rounded-lg">
+      <div className="bg-white shadow-lg p-6 rounded-lg">
          <form onSubmit={onSubmit}>
             <textarea
                placeholder="What's on your mind?"
