@@ -46,9 +46,9 @@ export default function CommentSection({ pool, event }: Props) {
 
 
    return (
-      <div className='w-1/2 rounded-md'>
+      <div className='flex flex-col w-1/2 rounded-md'>
          <h1 className="text-white text-right p-2">Comments</h1>
-         <div className='h-64 w-full p-4 overflow-y-scroll'>
+         <div className='h-64 w-full flex-grow p-4 overflow-y-scroll'>
             {
                events.map((evnt) => (
                   // make key unique other than Math.random()
@@ -72,7 +72,9 @@ export default function CommentSection({ pool, event }: Props) {
                ))
             }
          </div>
-         <ReplyPoll pool={pool} event={event} toggleMenu={() => false} rows={1} />
+         <div>
+            <ReplyPoll pool={pool} event={event} toggleMenu={() => false} rows={1} />
+         </div>
       </div>
    )
 }

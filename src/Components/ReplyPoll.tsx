@@ -74,7 +74,7 @@ export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
    }
 
    return (
-      <div className="flex-grow">
+      <div>
          <form className="flex flex-row justify-end" onSubmit={onSubmit}>
             <div className="w-2/3">
                <textarea
