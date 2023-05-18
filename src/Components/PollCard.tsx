@@ -38,17 +38,12 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
       const pictures: string[] = [];
       const text: string[] = [];
 
-      console.log("Words: ", words)
-
       // loop through each word and see if it is a picture
       words.map((word) => {
          allowedTypes.map((type) => {word.includes(type) ? 
             pictures.push(word) :
             text.push(word)})
       })
-
-      console.log("Pictures: ", pictures)
-      console.log("Text: ", text)
 
       // if there are pictures, display them
       if (pictures.length > 0) {
@@ -74,9 +69,9 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
    }
 
    return (
-      <div className="flex flex-row">
-         <div className="flex flex-col border rounded-md w-1/2 p-4">
-            <div className="flex user-info items-center mb-4">
+      <div className="flex flex-row border-b border-[#59B7D4] border-b-2 p-2">
+         <div className="flex flex-col rounded-md w-1/2 p-4">
+            <div className="flex border user-info items-center rounded-b-lg p-2 mb-4">
                <img src={user.image} alt="User Avatar" className="h-8 w-8 rounded-full" />
                <a
                   href={`https://nostr.guru/p/${user.pubkey}`}

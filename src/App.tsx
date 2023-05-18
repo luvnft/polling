@@ -119,7 +119,7 @@ function App() {
     <div className="flex flex-col gap-16">
       <Header />
       <CreatePoll pool={pool} events={events} metadata={metadata} />
-      <div className="rounded-md bg-[#111827]">
+      <div className="rounded-md bg-[#163C65]">
         <PollList pool={pool} events={events} metadata={metadata} />
       </div>
     </div>

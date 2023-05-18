@@ -82,10 +82,12 @@ export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
                value={pollReply}
                onChange={(e) => setPollReply(e.target.value)}
                rows={rows} />
-            <button className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+            <button className="w-full bg-[#5992D4] hover:bg-[#3570D4] text-white py-2 px-4 rounded">
                Reply
             </button>
          </form>
       </div>
    )
 }
+
+// #3570D4, #163C65, #895AD5, #6768E6, #DC55DC, #2B2E58, #88AAF5, #8DC2FD, #7DFBFB, #35227A
