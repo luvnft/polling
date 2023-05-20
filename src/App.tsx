@@ -6,7 +6,7 @@ import { useDebounce } from "use-debounce";
 
 
 // component imports 
-import CreatePoll from "./Components/Comment/CreatePoll";
+import CreatePoll from "./Components/CreatePoll";
 import PollList from "./Components/PollList";
 import Header from "./Components/Header";
 import { Metadata } from "./types/nostr";
@@ -118,10 +118,8 @@ function App() {
   return (
     <div className="flex flex-col">
       <Header />
-      <CreatePoll pool={pool} events={events} metadata={metadata} />
-      <div className="h-3 bg-gradient-to-r from-[#FBBFCC] via-[#F493B0] via-[#87A4C5] to-[#5DAE86]"></div>
-      {/* <div className="h-20 bg-gradient-to-b from-white via-[#C5E0F6] to-[#2A2C3C]"></div> */}
-      <div className="bg-gradient-to-b from-[#2A2C3C] via-[#332A48] via-[#3F315A] via-[#5077A8] to-[#2A2C3C]">
+      <div className="flex flex-col justify-center items-center gap-3">
+        <CreatePoll pool={pool} events={events} metadata={metadata} />
         <PollList pool={pool} events={events} metadata={metadata} />
       </div>
     </div>

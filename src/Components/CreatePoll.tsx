@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
-import { RELAYS } from "../../App";
-import { Metadata } from "../../types/nostr";
-import NostrImg, { UploadResult } from "../../upload/Nostrimg";
+import { RELAYS } from "../App";
+import { Metadata } from "../types/nostr";
+import NostrImg, { UploadResult } from "../upload/Nostrimg";
 
 interface Props {
    pool: SimplePool;
@@ -81,30 +81,14 @@ export default function CreatePoll({ pool, events, metadata }: Props) {
     
 
    return (
-      // <div className="bg-white shadow-md p-6 rounded-lg">
-      //    <form onSubmit={onSubmit}>
-      //       <textarea
-      //          placeholder="What's on your mind?"
-      //          className="w-full resize-none border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 text-gray-700 leading-tight"
-      //          value={input}
-      //          onChange={(e) => setInput(e.target.value)}
-      //          rows={5}
-      //       />
-      //       <div className="flex justify-end mt-4">
-      //          <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
-      //             Post
-      //          </button>
-      //       </div>
-      //    </form>
-      // </div>
-      <div className="bg-white shadow-lg p-6 rounded-lg">
+      <div className="bg-white shadow-md p-6 rounded-lg w-1/2">
          <form onSubmit={onSubmit}>
             <textarea
                placeholder="What's on your mind?"
                className="w-full resize-none border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 text-gray-700 leading-tight"
                value={input}
                onChange={(e) => setInput(e.target.value)}
-               rows={5}
+               rows={1}
             />
             <div className="mt-4">
                <label htmlFor="image-input" className="text-gray-700">

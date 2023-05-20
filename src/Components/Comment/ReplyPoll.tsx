@@ -1,6 +1,6 @@
 import { EventTemplate, getEventHash, SimplePool, Event } from "nostr-tools";
 import { useState } from "react";
-import { RELAYS } from "../App";
+import { RELAYS } from "../../App";
 
 // the reply takes in an event in order to reply to it
 interface Props {

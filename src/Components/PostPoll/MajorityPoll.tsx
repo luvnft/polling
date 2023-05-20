@@ -94,13 +94,13 @@ export default function MajorityPoll({ event, pool }: Props) {
 
 
    return (
-      <div className="w-72 text-white">
+      <div className="w-1/2 text-white">
          <form onSubmit={onSubmit}>
             {!voted ? (
-               <div>
+               <div className='flex flex-row gap-1 '>
                   <button
                      type="submit"
-                     className="px-4 py-2 text-sm font-medium text-white border-[#276749] bg-[#5DAE86] hover:bg-[#2F855A] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                     className="px-4 py-2 text-sm font-small text-white border-[#276749] bg-[#5DAE86] hover:bg-[#2F855A] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                      onClick={(() => {
                         setVoteCount(voteCount + 1)
                         setSum(sum + value)

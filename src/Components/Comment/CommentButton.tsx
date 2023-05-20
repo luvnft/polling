@@ -6,7 +6,7 @@ import tw from 'tailwind-styled-components';
 import { SimplePool } from 'nostr-tools';
 
 // components import
-import ReplyPoll from '../ReplyPoll';
+import ReplyPoll from './ReplyPoll';
 
 // Styling for the comment button
 const CommentButton = tw.button`
@@ -47,7 +47,7 @@ export default function CommentModal({ event, pool, content, user }: Props) {
          <CommentButton onClick={() => {
             setModalIsOpen(true);
          }}>
-            <FaComment />
+            <FaComment className='text-black hover:text-gray-200'/>
          </CommentButton>
          <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
             <div className="flex justify-between mb-4">
