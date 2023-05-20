@@ -50,6 +50,19 @@ interface Props {
 }
 
 export default function CustomizedSlider({defaultValue, setValue, disabled}: Props) {
+
+  const marks = [
+    {
+      value: 0,
+      label: 'Agree',
+    },
+    {
+      value: 100,
+      label: 'Disagree',
+    },
+  ];
+
+  
   const handleChange = (event: Event, newValue: number | number[]) => {
     event.preventDefault();
     setValue(newValue as number);
@@ -64,6 +77,7 @@ export default function CustomizedSlider({defaultValue, setValue, disabled}: Pro
         defaultValue={20}
         value={defaultValue}
         onChange={handleChange}
+        marks={marks}
       />
     </Box>
   );

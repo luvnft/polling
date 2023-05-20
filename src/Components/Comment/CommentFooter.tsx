@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import CommentSection from "./CommentSection";
-import CommentModal from "./CommentButton";
-import { FaHeart, FaShare } from "react-icons/fa";
+import { FaHeart, FaShare, FaComment } from "react-icons/fa";
+
 import MajorityPoll from "../PostPoll/MajorityPoll";
 import { SimplePool } from 'nostr-tools';
 
@@ -23,27 +23,32 @@ interface Props {
 
 export default function CommentFooter({ content, user, created_at, hashtags, pool, event }: Props) {
 
+   const [commentOpen, setCommentOpen] = useState(false);
    const [liked, setLiked] = useState(false);
    const curUser = {
       name: user.name,
       image: user.image,
       date: new Date(created_at * 1000).toISOString().split("T")[0],
    }
-   
+
    return (
-      <div className="flex justify-center border border-t">
-         <div>
-            <MajorityPoll event={event} pool={pool} />
+      <div className="flex flex-col border border-t">
+         <div className="flex flex-row">
+            <div>
+               <MajorityPoll event={event} pool={pool} />
+            </div>
+            <div className="flex w-full justify-between items-center p-3">
+               {/* <CommentModal event={event} pool={pool} content={content} user={curUser} /> */}
+               <FaComment className='text-black hover:text-gray-300' onClick={() => setCommentOpen(!commentOpen)} />
+               <FaHeart className='text-black hover:text-red-300' onClick={() => setLiked(!liked)} />
+               <FaShare className='text-black hover:text-gray-300' />
+            </div>
          </div>
-         <div className="flex justify-start items-start align-left">
-            <CommentModal event={event} pool={pool} content={content} user={curUser} />
-            <button className="text-black hover:text-red-300 py-2 px-4 rounded" onClick={() => setLiked(!liked)}>
-               <FaHeart color={`${liked ? "red" : ""}`} />
-            </button>
-            <button className="text-black hover:text-gray-200 py-2 px-4 rounded">
-               <FaShare />
-            </button>
-         </div>
+         {
+            commentOpen ?
+               <CommentSection event={event} pool={pool} /> :
+               null
+         }
       </div>
    )
 }

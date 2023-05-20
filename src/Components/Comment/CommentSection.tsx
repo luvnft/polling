@@ -46,14 +46,14 @@ export default function CommentSection({ pool, event }: Props) {
 
 
    return (
-      <div className='flex flex-col w-1/2 rounded-md'>
-         <h1 className="text-white text-right p-2">Comments</h1>
+      <div className='flex flex-col rounded-md'>
+         <h1 className="text-black text-left p-2">Comments</h1>
          <div className='h-64 w-full flex-grow p-4 overflow-y-scroll'>
             {
                events.map((evnt) => (
                   // make key unique other than Math.random()
-                  <div key={Math.random()} className="flex flex-col p-2">
-                     <div className="user-info flex items-center justify-end">
+                  <div key={Math.random()} className="flex flex-col">
+                     <div className="user-info flex items-center justify-start">
                         <img src={getProfileDataFromMetaData(metadata, evnt.pubkey).image ||
                            `https://api.dicebear.com/5.x/identicon/svg?seed=${evnt.pubkey}`} alt="User Avatar" className="h-8 w-8 rounded-full" />
                         <a
@@ -65,7 +65,7 @@ export default function CommentSection({ pool, event }: Props) {
                            <p className="ml-2 font-semibold text-gray-700 text-sm">{getProfileDataFromMetaData(metadata, evnt.pubkey).name || nip19.npubEncode(evnt.pubkey)}</p>
                         </a>
                      </div>
-                     <div className="text-white text-right">
+                     <div className="text-black text-left pl-5">
                         <p>{evnt.content}</p>
                      </div>
                   </div>

@@ -75,8 +75,8 @@ export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
 
    return (
       <div>
-         <form className="flex flex-row justify-end" onSubmit={onSubmit}>
-            <div className="w-2/3">
+         <form className="flex flex-row justify-start" onSubmit={onSubmit}>
+            <div className="w-full">
                <textarea
                   placeholder="Write your note here..."
                   className="border border-gray-300 bg-[#F4F7FA] rounded-lg w-full p-2"

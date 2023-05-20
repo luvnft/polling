@@ -1,7 +1,6 @@
 import { SimplePool } from "nostr-tools";
 // components
 import CommentFooter from "./Comment/CommentFooter";
-import { useState } from "react";
 
 
 interface Props {
