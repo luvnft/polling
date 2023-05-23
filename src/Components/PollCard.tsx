@@ -26,8 +26,6 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
       const pictures: string[] = [];
       const text: string[] = [];
 
-      console.log(words)
-
       // loop through each word and see if it is a picture
       words.map((word) => {
          allowedTypes.map((type) => {
@@ -37,7 +35,6 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
          })
       })
 
-      console.log(pictures)
 
       // if there are pictures, display them
       if (pictures.length > 0) {

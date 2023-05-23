@@ -30,7 +30,8 @@ function BoardRoomFeed() {
   const [metadata, setMetaData] = useState<Record<string, Metadata>>({});
   const metadataFetched = useRef<Record<string, boolean>>({});
   const { userId } = useParams();
-  const tags: string[][] = [["t", `aitc/polling/${{userId}}`]]
+  const tags: string[][] = [["t", `aitc/polling/${userId}`]]
+  console.log(tags)
 
   // create a relay pool
   useEffect(() => {
@@ -59,12 +60,13 @@ function BoardRoomFeed() {
     const sub = pool.sub(RELAYS, [{
       kinds: [1],
       limit: 100,
-      "#t": [`aitc/polling/${{userId}}`]
+      "#t": [`aitc/polling/${userId}`]
     }])
 
     // on subscribtion get event and log it
     sub.on('event', (event: Event) => {
       setEvents((events) => insertEventIntoDescendingList(events, event));
+      console.log("Event", event)
     });
 
     return () => {
