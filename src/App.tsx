@@ -10,6 +10,7 @@ import CreatePoll from "./Components/CreatePoll";
 import PollList from "./Components/PollList";
 import Header from "./Components/Header";
 
+import Interests from "./Components/Interests";
 
 // define relays
 export const RELAYS = [
@@ -122,11 +123,12 @@ function App() {
 
   return (
     <div className="flex flex-col gap-16">
-      <Header />
+      {/* <Header />
       <CreatePoll pool={pool} events={events} metadata={metadata} />
       <div className="bg-gray-500">
         <PollList pool={pool} events={events} metadata={metadata} />
-      </div>
+      </div> */}
+      <Interests />
     </div>
   )
 }

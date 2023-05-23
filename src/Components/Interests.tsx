@@ -1,0 +1,90 @@
+import { useState } from "react";
+import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
+import { Metadata, RELAYS } from "../App";
+import Header from "./Header";
+
+interface Props {
+	pool: SimplePool;
+	events: Event[];
+	metadata: Record<string, Metadata>;
+}
+
+export default function Interests({ pool, events, metadata }: Props) {
+	
+	const interestList: string[] = [
+		"Animals", 
+		"Art",  
+		"Electronics", 
+		"Finance",
+		"Politics",
+		"Travel"]
+
+	return (
+		<div className="flex flex-col justify-center items-center">
+			<Header />
+			<div className="grid grid-cols-3 grid-flow-row gap-4 justify-center items-center justify-items-center w-2/3">
+				{interestList.map((interest) => (
+					<div
+						className="text-white text-center rounded-xl font-medium relative object-fill "
+						key={interest}
+					>
+						<button className="relative rounded-xl h-full w-full hover:opacity-60">
+							<h1 className="absolute inset-0 flex items-center justify-center text-center text-3xl">
+								{interest}
+							</h1>
+							<img
+								className="object-cover rounded-xl"
+								src={`/${interest}.png`}
+								alt=""
+							/>
+						</button>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+
+}
+
+// <div className="bg-blue-500 h-screen">
+// 	<div className="bg-white p-6 rounded-xl">
+// 		interest page
+// 	</div>
+// 	<div className="bg-white rounded-xl p-5 gap-4 flex-col flex">
+// 		<div className="flex gap-3 justify-center h-48 w-full">
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md font-medium">
+// 				Int1
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int2
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int3
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int4
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int5
+// 			</button>
+// 		</div>
+// 		<div>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white center h-full rounded-md font-medium">
+// 				Int1
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int2
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int3
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int4
+// 			</button>
+// 			<button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium">
+// 				Int5
+// 			</button>
+
+// 		</div>
+// 	</div>
+// </div>
