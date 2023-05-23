@@ -18,13 +18,15 @@ interface Props {
 
 export default function PollCard({ content, user, created_at, hashtags, pool, event }: Props) {
 
-   const allowedTypes = ["file.png"];
+   const allowedTypes = ["file."];
 
    function displayContent(content: string) {
       // make string into an array of words
       const words = content.split(" ");
       const pictures: string[] = [];
       const text: string[] = [];
+
+      console.log(words)
 
       // loop through each word and see if it is a picture
       words.map((word) => {
@@ -34,6 +36,8 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
             text.push(word)
          })
       })
+
+      console.log(pictures)
 
       // if there are pictures, display them
       if (pictures.length > 0) {

@@ -8,9 +8,10 @@ interface Props {
    pool: SimplePool;
    events: Event[];
    metadata: Record<string, Metadata>;
+   tags: string[][];
 }
 
-export default function CreatePoll({ pool, events, metadata }: Props) {
+export default function CreatePoll({ pool, tags, events, metadata }: Props) {
    const [input, setInput] = useState("");
    const [image, setImage] = useState<UploadResult | null>(null);
 
@@ -28,7 +29,7 @@ export default function CreatePoll({ pool, events, metadata }: Props) {
          content: input,
          created_at: Math.round(Date.now() / 1000),
          kind: 1,
-         tags: [["t", "aitc/polling/v1"], ["t", "poll"]],
+         tags: tags,
       } as EventTemplate;
 
       // Sign this event (allow the user to sign it with their private key)

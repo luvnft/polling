@@ -1,16 +1,9 @@
-import { Event, SimplePool, } from "nostr-tools";
-import { useEffect, useRef, useState } from 'react';
 import './App.css'
-import { insertEventIntoDescendingList } from "./utils/helperFunctions";
-import { useDebounce } from "use-debounce";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-
-// component imports 
-import CreatePoll from "./Components/CreatePoll";
-import PollList from "./Components/PollList";
-import Header from "./Components/Header";
-import { Metadata } from "./types/nostr";
-
+// routes
+import PublicFeed from "./Feeds/PublicFeed";
+import BoardRoomFeed from "./Feeds/BoardRoomFeed";
 
 // define relays
 export const RELAYS = [
@@ -20,109 +13,16 @@ export const RELAYS = [
   "wss://relay.damus.io",
 ];
 
-
 function App() {
-
-  // we want to create the pool once so we store it in a state
-  const [pool, setPool] = useState<SimplePool | null>(null);
-  const [eventsImmediate, setEvents] = useState<Event[]>([]);
-  const [events] = useDebounce(eventsImmediate, 1000)
-  const [metadata, setMetaData] = useState<Record<string, Metadata>>({});
-  const metadataFetched = useRef<Record<string, boolean>>({});
-
-  // create a relay pool
-  useEffect(() => {
-    const _pool = new SimplePool();
-    setPool(_pool);
-
-    // close the pool when we unmount the component
-    // we have to specify the relays that we want to close too
-    return () => {
-      _pool.close(RELAYS);
-    }
-  }, []);
-
-
-  // subscribe to nip 78 event
-  // also inside of the useEffect hook b/c we only want 
-  // to subscribe once the pool is created one time
-  useEffect(() => {
-    // we have to check if the pool is null
-    // because the first time this component renders
-    // the pool will be null
-    if (!pool) return;
-
-    // subscribe to nip 1 kind
-    // pool automatically deduplicates relay events
-    const sub = pool.sub(RELAYS, [{
-      kinds: [1],
-      limit: 100,
-      "#t": ["aitc/polling/v1"]
-    }])
-
-    // on subscribtion get event and log it
-    sub.on('event', (event: Event) => {
-      setEvents((events) => insertEventIntoDescendingList(events, event));
-    });
-
-    return () => {
-      // close the subscription when we unmount the component
-      sub.unsub();
-    }
-
-  }, [pool]);
-
-  // get the meta data from a user
-  useEffect(() => {
-    if (!pool) return;
-
-    // we want to exclude the keys that we already have in the subscription
-    const pubkeysToFetch = events
-      .filter((event) => !metadataFetched.current[event.pubkey])
-      .map((event) => event.pubkey);
-
-    // mark the pubkeys as fetched
-    pubkeysToFetch.forEach((pubkey) => {
-      metadataFetched.current[pubkey] = true;
-    })
-
-    // get metadata from a user
-    const sub = pool.sub(RELAYS, [{
-      kinds: [0],
-      authors: pubkeysToFetch,
-    }])
-
-    // on subscribtion get event and log it
-    sub.on('event', (event: Event) => {
-
-      // meta data is stored as json so we have to parse it
-      const metadata = JSON.parse(event.content) as Metadata;
-
-      setMetaData((cur) => ({
-        ...cur,
-        [event.pubkey]: metadata
-      }))
-    });
-
-    // end of stored event then unsubscribe
-    sub.on('eose', () => {
-      sub.unsub();
-    })
-
-  }, [events, pool]);
-
-
-  if (!pool) return null;
-
-  // bg-#585858
   return (
-    <div className="flex flex-col">
-      <Header />
-      <div className="flex flex-col justify-center items-center gap-3">
-        <CreatePoll pool={pool} events={events} metadata={metadata} />
-        <PollList pool={pool} events={events} metadata={metadata} />
-      </div>
-    </div>
+    <Router>
+         <Routes>
+            <Route path="/" element={<PublicFeed/>} />
+            <Route path="/interests" element={null} />
+            <Route path="/boardroom/:userId" element={<BoardRoomFeed />} />
+            <Route element={null} /> {/* A catch-all route for 404 errors */}
+         </Routes>
+      </Router>
   )
 }
 
