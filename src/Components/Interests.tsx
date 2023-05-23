@@ -24,21 +24,18 @@ export default function Interests({ pool, events, metadata }: Props) {
 			<Header />
 			<div className="grid grid-cols-3 grid-flow-row gap-4 justify-center items-center justify-items-center w-2/3">
 				{interestList.map((interest) => (
-					<div
-						className="text-white text-center rounded-xl font-medium relative object-fill "
-						key={interest}
-					>
-						<button className="relative rounded-xl h-full w-full hover:opacity-60">
-							<h1 className="absolute inset-0 flex items-center justify-center text-center text-3xl">
+
+						<button className="text-white text-center font-medium relative rounded-xl h-full w-full hover:opacity-60">
+							<h1 className="absolute inset-0 flex items-center justify-center text-center lg:text-4xl md:text-xl sm: text-m">
 								{interest}
 							</h1>
 							<img
-								className="object-cover rounded-xl"
+								className="object-cover h-full w-full rounded-xl"
 								src={`/${interest}.png`}
 								alt=""
 							/>
 						</button>
-					</div>
+
 				))}
 			</div>
 		</div>
