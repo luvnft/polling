@@ -1,14 +1,11 @@
-import { SimplePool } from "nostr-tools";
+import { SimplePool, Event } from "nostr-tools";
 // components
 import CommentFooter from "./Comment/CommentFooter";
 
 
 interface Props {
    pool: SimplePool;
-   event: {
-      id: string;
-      pubkey: string;
-   };
+   event: Event;
    content: string;
    user: {
       name: string;
@@ -55,7 +52,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
       } else {
          return (
             <p className="text-black text-md h-full w-full">
-               {content}
+               {event.content}
             </p>
          )
       }
@@ -78,7 +75,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
             </p>
          </div>
          <p className="text-white text-md h-full w-full">
-            {displayContent(content)}
+            {displayContent(event.content)}
          </p>
          {/* <ul className="flex flex-wrap gap-4">
             {hashtags

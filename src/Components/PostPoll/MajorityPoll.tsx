@@ -5,10 +5,7 @@ import { RELAYS } from "../../App"
 import Slider from './PollSlider'
 
 interface Props {
-   event: {
-      id: string;
-      pubkey: string;
-   }
+   event: Event;
    pool: SimplePool;
 }
 
@@ -29,6 +26,13 @@ export default function MajorityPoll({ event, pool }: Props) {
    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
+      const tags: string[][] = event.tags.filter((tag: string[]) => {
+         return tag.length >= 2 && (tag[0] === "e" || tag[0] === "p");
+      });
+
+      tags.push(["e", event.id])
+      tags.push(["p", event.pubkey])
+
       if (!window.nostr) {
          alert("Nostr extension not found");
          return;
@@ -37,14 +41,13 @@ export default function MajorityPoll({ event, pool }: Props) {
       const _baseEvent = {
          content: `${votePercentage}, ${voteCount}, ${sum}`,
          created_at: Math.round(Date.now() / 1000),
-         kind: 30078,
-         tags: [["d", event.id]],
+         kind: 7,
+         tags: tags,
       } as EventTemplate;
 
       try {
 
          const pubkey = await window.nostr.getPublicKey();
-
          const sig = (await window.nostr.signEvent(_baseEvent)).sig;
 
          const event: Event = {
@@ -75,9 +78,9 @@ export default function MajorityPoll({ event, pool }: Props) {
       if (!pool) return;
       // subscribe to the events that have the d tag as the event sig
       const sub = pool.sub(RELAYS, [{
-         kinds: [30078],
+         kinds: [7],
          limit: 100,
-         "#d": [event.id],
+         "#e": [event.id],
       }]);
 
       // on subscrition set the results
@@ -96,7 +99,7 @@ export default function MajorityPoll({ event, pool }: Props) {
 
 
    return (
-      <div className="w-1/2 text-white">
+      <div className="w-1/2 text-white p-2">
          <form onSubmit={onSubmit}>
             {!voted ? (
                <div className='flex flex-row items-center gap-5'>
@@ -109,16 +112,16 @@ export default function MajorityPoll({ event, pool }: Props) {
                      })}
                   > */}
                   <button type="submit">
-                     <FaVoteYea className="text-[#5DAE86] hover:text-[#2F855A]" onClick={(() => {
+                     <FaVoteYea className="text-[#5DAE86] hover:text-[#2F855A] mb-7" onClick={(() => {
                         setVoteCount(voteCount + 1)
                         setSum(sum + value)
                      })} />
                   </button>
                   <Slider defaultValue={value} setValue={setValue} disabled={false} />
                </div>) : (
-               <div>
-                  <h1 className='text-xs font-medium text-white'>You voted {value}%</h1>
-                  <h1 className='text-xs font-medium text-white'>People {votePercentage}% agree with this information</h1>
+               <div className='flex items-center gap-5'>
+                  <h1 className='text-xs font-medium text-black'>You voted {value}%</h1>
+                  <h1 className='text-xs font-medium text-black'>People {votePercentage}% agree with this information</h1>
                   <Slider defaultValue={votePercentage} setValue={setValue} disabled={true} />
                </div>
             )
