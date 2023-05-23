@@ -3,14 +3,11 @@ import CommentSection from "./CommentSection";
 import { FaHeart, FaShare, FaComment } from "react-icons/fa";
 
 import MajorityPoll from "../PostPoll/MajorityPoll";
-import { SimplePool } from 'nostr-tools';
+import { SimplePool, Event } from 'nostr-tools';
 
 interface Props {
    pool: SimplePool;
-   event: {
-      id: string;
-      pubkey: string;
-   };
+   event: Event;
    content: string;
    user: {
       name: string;
