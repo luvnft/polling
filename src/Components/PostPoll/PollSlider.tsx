@@ -54,11 +54,11 @@ export default function CustomizedSlider({defaultValue, setValue, disabled}: Pro
   const marks = [
     {
       value: 0,
-      label: 'Agree',
+      label: 'Disagree',
     },
     {
       value: 100,
-      label: 'Disagree',
+      label: 'Agree',
     },
   ];
 

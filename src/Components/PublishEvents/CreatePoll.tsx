@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
-import { RELAYS } from "../App";
-import { Metadata } from "../types/nostr";
-import NostrImg, { UploadResult } from "../upload/Nostrimg";
+import { RELAYS } from "../../App";
+import { Metadata } from "../../types/nostr";
+import NostrImg, { UploadResult } from "../../upload/Nostrimg";
+import DropDownMenu from "./DDPollType";
 
 interface Props {
    pool: SimplePool;
@@ -55,6 +56,7 @@ export default function CreatePoll({ pool, tags, events, metadata }: Props) {
 
             clearedInput = true;
             setInput("");
+            setImage(null);
          });
       } catch (error) {
          console.log(error)
@@ -78,8 +80,8 @@ export default function CreatePoll({ pool, tags, events, metadata }: Props) {
       setImage(image)
       setInput(image.url!)
       console.log('Selected image:', selectedImage);
-    }
-    
+   }
+
 
    return (
       <div className="bg-white shadow-md p-6 rounded-lg w-1/2">
@@ -89,29 +91,33 @@ export default function CreatePoll({ pool, tags, events, metadata }: Props) {
                className="w-full resize-none border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 text-gray-700 leading-tight"
                value={input}
                onChange={(e) => setInput(e.target.value)}
-               rows={1}
+               rows={3}
             />
-            <div className="mt-4">
-               <label htmlFor="image-input" className="text-gray-700">
-                  Select a picture:
-               </label>
+            <div className="flex justify-between mt-4">
                <input
                   type="file"
                   id="image-input"
                   accept="image/*"
                   onChange={handleImageSelection}
-                  className="mt-1"
+                  className="hidden"
                />
-            </div>
-            <div className="flex justify-end mt-4">
+               <label
+                  htmlFor="image-input"
+                  className="cursor-pointer font-medium hover:bg-gray-200 text-black py-2 px-4 rounded-lg"
+               >
+                  Picture
+               </label>
+               <DropDownMenu />
                <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium"
+                  className="font-medium hover:bg-gray-200 text-black py-2 px-4 rounded-lg"
                >
                   Post
                </button>
             </div>
-            <img src={image?.url} alt="preview" />
+            <div className="flex justify-center mt-4">
+               <img className="object-fit" src={image?.url} alt="" />
+            </div>
          </form>
       </div>
 
