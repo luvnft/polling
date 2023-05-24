@@ -47,7 +47,7 @@ export default function CommentModal({ event, pool, content, user }: Props) {
          <CommentButton onClick={() => {
             setModalIsOpen(true);
          }}>
-            <FaComment />
+            <FaComment className='text-black hover:text-gray-200'/>
          </CommentButton>
          <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
             <div className="flex justify-between mb-4">
@@ -56,7 +56,7 @@ export default function CommentModal({ event, pool, content, user }: Props) {
                <button className="text-gray-600" onClick={() => setModalIsOpen(false)}><AiOutlineCloseCircle/></button>
             </div>
             <p className="text-gray-800 mb-4">{content}</p>
-            <ReplyPoll event={event} pool={pool} />
+            <ReplyPoll event={event} pool={pool} toggleMenu={setModalIsOpen} rows={6}/>
          </Modal>
       </>
    );
