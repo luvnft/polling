@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PublicFeed from "./Feeds/PublicFeed";
 import BoardRoomFeed from "./Feeds/BoardRoomFeed";
 
+
 // define relays
 export const RELAYS = [
   "wss://nostr.pub.wellorder.net",
