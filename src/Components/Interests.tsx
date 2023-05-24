@@ -1,21 +1,18 @@
-import { useState } from "react";
-import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
-import { Metadata, RELAYS } from "../App";
 import Header from "./Header";
 import { useNavigate } from 'react-router-dom';
 
 export default function Interests() {
 
 	const navigate = useNavigate();
-
 	const handlePageClick = (interest: string) => {
-		navigate(`/boardroom/${interest}`)
+		navigate(`/boardroom/${interest.toLowerCase()}`);
+		window.location.reload();
 	};
-	
+
 	const interestList: string[] = [
-		"Animals", 
-		"Art",  
-		"Electronics", 
+		"Animals",
+		"Art",
+		"Electronics",
 		"Finance",
 		"Politics",
 		"Travel"]
@@ -25,9 +22,9 @@ export default function Interests() {
 			<Header />
 			<div className="grid grid-cols-3 grid-flow-row gap-4 justify-center items-center justify-items-center w-2/3">
 				{interestList.map((interest) => (
-						<button 
+						<button
 							className="text-white text-center font-medium relative rounded-xl h-full w-full hover:opacity-60"
-							onClick={() => handlePageClick(interest)} 
+							onClick={() => handlePageClick(interest)}
 						>
 							<h1 className="absolute inset-0 flex items-center justify-center text-center lg:text-4xl md:text-xl sm: text-m">
 								{interest}

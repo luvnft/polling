@@ -124,7 +124,7 @@ function BoardRoomFeed() {
       <Header />
       <div className="flex flex-col justify-center items-center gap-3">
         <CreatePoll pool={pool} tags={tags} events={events} metadata={metadata} />
-        <div className="text-2xl font-bold text-black">Welcome to { userId } Polls</div>
+        <div className="text-2xl font-bold text-black">Welcome to { userId } polls</div>
         <PollList pool={pool} events={events} metadata={metadata} />
       </div>
     </div>
