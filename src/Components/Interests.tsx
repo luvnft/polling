@@ -2,14 +2,15 @@ import { useState } from "react";
 import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
 import { Metadata, RELAYS } from "../App";
 import Header from "./Header";
+import { useNavigate } from 'react-router-dom';
 
-interface Props {
-	pool: SimplePool;
-	events: Event[];
-	metadata: Record<string, Metadata>;
-}
+export default function Interests() {
 
-export default function Interests({ pool, events, metadata }: Props) {
+	const navigate = useNavigate();
+
+	const handlePageClick = (interest: string) => {
+		navigate(`/boardroom/${interest}`)
+	};
 	
 	const interestList: string[] = [
 		"Animals", 
@@ -24,8 +25,10 @@ export default function Interests({ pool, events, metadata }: Props) {
 			<Header />
 			<div className="grid grid-cols-3 grid-flow-row gap-4 justify-center items-center justify-items-center w-2/3">
 				{interestList.map((interest) => (
-
-						<button className="text-white text-center font-medium relative rounded-xl h-full w-full hover:opacity-60">
+						<button 
+							className="text-white text-center font-medium relative rounded-xl h-full w-full hover:opacity-60"
+							onClick={() => handlePageClick(interest)} 
+						>
 							<h1 className="absolute inset-0 flex items-center justify-center text-center lg:text-4xl md:text-xl sm: text-m">
 								{interest}
 							</h1>
@@ -35,7 +38,6 @@ export default function Interests({ pool, events, metadata }: Props) {
 								alt=""
 							/>
 						</button>
-
 				))}
 			</div>
 		</div>
