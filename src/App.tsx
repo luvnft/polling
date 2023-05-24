@@ -15,12 +15,10 @@ export const RELAYS = [
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<PublicFeed />} />
-        <Route path="/boardroom/:userId" element={<BoardRoomFeed />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<PublicFeed />} />
+      <Route path="/boardroom/:userId" element={<BoardRoomFeed />} />
+    </Routes>
   )
 }
 

@@ -45,7 +45,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                </p>
                <div className="flex flex-row justify-center">
                   {pictures.map((picture) => (
-                     <img src={picture} alt="Poll Picture" className="scale-25" />
+                     <img src={picture} key={picture} alt="Poll Picture" className="scale-25" />
                   ))}
                </div>
             </div>
@@ -75,9 +75,9 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                {new Date(created_at * 1000).toISOString().split("T")[0]}
             </p>
          </div>
-         <p className="text-white text-md h-full w-full">
+         <div>
             {displayContent(event.content)}
-         </p>
+         </div>
          {/* <ul className="flex flex-wrap gap-4">
             {hashtags
                .filter((t) => hashtags.indexOf(t) === hashtags.lastIndexOf(t))
