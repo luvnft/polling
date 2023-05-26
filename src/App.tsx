@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Interests />} />
         <Route path="/public" element={<PublicFeed />} />
-        <Route path="/boardroom/:userId" element={<BoardRoomFeed />} />
+        <Route path="/boardroom/:userId/:privateKey" element={<BoardRoomFeed />} />
       </Routes>
     </div>
   )

@@ -5,7 +5,7 @@ export default function Interests() {
 
 	const navigate = useNavigate();
 	const handlePageClick = (interest: string) => {
-		navigate(`/boardroom/${interest.toLowerCase()}`);
+		navigate(`/boardroom/${interest.toLowerCase()}/1234`);
 		window.location.reload();
 	};
 

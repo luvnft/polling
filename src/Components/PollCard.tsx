@@ -75,7 +75,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                {new Date(created_at * 1000).toISOString().split("T")[0]}
             </p>
          </div>
-         <div>
+         <div className="pt-2">
             {displayContent(event.content)}
          </div>
          {/* <ul className="flex flex-wrap gap-4">

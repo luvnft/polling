@@ -12,6 +12,7 @@ import { Metadata } from "../types/nostr";
 import { useParams } from "react-router-dom";
 
 
+
 // define relays
 export const RELAYS = [
   "wss://nostr.pub.wellorder.net",
@@ -30,8 +31,11 @@ function BoardRoomFeed() {
   const [metadata, setMetaData] = useState<Record<string, Metadata>>({});
   const metadataFetched = useRef<Record<string, boolean>>({});
   const { userId } = useParams();
+  const { privateKey } = useParams();
   const tags: string[][] = [["t", `aitc/polling/${userId}`]]
-  console.log(tags)
+
+  console.log("user id", userId)
+  console.log("private key", privateKey)
 
   // create a relay pool
   useEffect(() => {
