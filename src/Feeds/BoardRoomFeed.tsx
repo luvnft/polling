@@ -39,7 +39,9 @@ function BoardRoomFeed() {
     ? = /
   */}
   
-  const encryptedPrivkey = privateKey?.replace(/\?/g, '/');
+  // TODO: replace all sequenced characters with their appropriate counterparts
+  const encryptedPrivkey = privateKey?.replace(/1/g, 'a');
+
   console.log("user id", userId)
   console.log("private key", encryptedPrivkey)
 
