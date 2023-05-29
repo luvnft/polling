@@ -30,16 +30,10 @@ export default function CommentFooter({ content, user, created_at, hashtags, poo
 
    return (
       <div className="flex flex-col border border-t">
-         <div className="flex flex-row">
-            <div>
-               <MajorityPoll event={event} pool={pool} />
-            </div>
-            <div className="flex w-full justify-between items-center p-3">
-               {/* <CommentModal event={event} pool={pool} content={content} user={curUser} /> */}
-               <FaComment className='text-black hover:text-gray-300' onClick={() => setCommentOpen(!commentOpen)} />
-               <FaHeart className='text-black hover:text-red-300' onClick={() => setLiked(!liked)} />
-               <FaShare className='text-black hover:text-gray-300' />
-            </div>
+         <div className="flex w-full justify-center items-center p-3">
+            <MajorityPoll event={event} pool={pool} />
+            <FaComment className='text-black mb-6 ml-20 hover:text-gray-300 cursor-pointer' onClick={() => setCommentOpen(!commentOpen)} />
+            {/* <CommentModal event={event} pool={pool} content={content} user={curUser} /> */}
          </div>
          {
             commentOpen ?

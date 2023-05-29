@@ -69,7 +69,8 @@ export default function CustomizedSlider({defaultValue, setValue, disabled}: Pro
   };
 
   return (
-    <Box sx={{ width: 320 }}>
+
+    <Box  sx={{ width: 200 }}>
       <PrettoSlider
         disabled={disabled}
         valueLabelDisplay="auto"

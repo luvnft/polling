@@ -99,34 +99,24 @@ export default function MajorityPoll({ event, pool }: Props) {
 
 
    return (
-      <div className="w-1/2 text-white p-2">
-         <form onSubmit={onSubmit}>
-            {!voted ? (
-               <div className='flex flex-row items-center gap-5'>
-                  {/* <button
-                     type="submit"
-                     className="px-4 py-2 text-sm font-small text-white border-[#276749] bg-[#5DAE86] hover:bg-[#2F855A] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-                     onClick={(() => {
-                        setVoteCount(voteCount + 1)
-                        setSum(sum + value)
-                     })}
-                  > */}
-                  <button type="submit">
-                     <FaVoteYea className="text-[#5DAE86] hover:text-[#2F855A] mb-7" onClick={(() => {
-                        setVoteCount(voteCount + 1)
-                        setSum(sum + value)
-                     })} />
-                  </button>
-                  <Slider defaultValue={value} setValue={setValue} disabled={false} />
-               </div>) : (
-               <div className='flex items-center gap-5'>
-                  <h1 className='text-xs font-medium text-black'>You voted {value}%</h1>
-                  <h1 className='text-xs font-medium text-black'>People {votePercentage}% agree with this information</h1>
-                  <Slider defaultValue={votePercentage} setValue={setValue} disabled={true} />
-               </div>
-            )
-            }
-         </form>
-      </div>
+      <form onSubmit={onSubmit} className=''>
+         {!voted ? (
+            <div className='flex flex-row items-center gap-5'>
+               <button type="submit">
+                  <FaVoteYea className="text-[#5DAE86] hover:text-[#2F855A] mb-7 cursor-copy" onClick={(() => {
+                     setVoteCount(voteCount + 1)
+                     setSum(sum + value)
+                  })} />
+               </button>
+               <Slider defaultValue={value} setValue={setValue} disabled={false} />
+            </div>) : (
+            <div className='flex items-center gap-5'>
+               <h1 className='text-xs font-medium text-black'>You voted {value}%</h1>
+               <h1 className='text-xs font-medium text-black'>People {votePercentage}% agree with this information</h1>
+               <Slider defaultValue={votePercentage} setValue={setValue} disabled={true} />
+            </div>
+         )
+         }
+      </form>
    );
 }
