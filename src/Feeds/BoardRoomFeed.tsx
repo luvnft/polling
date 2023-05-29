@@ -34,8 +34,14 @@ function BoardRoomFeed() {
   const { privateKey } = useParams();
   const tags: string[][] = [["t", `aitc/polling/${userId}`]]
 
+  {/*
+   Key for replacing non characters in the private key
+    ? = /
+  */}
+  
+  const encryptedPrivkey = privateKey?.replace(/\?/g, '/');
   console.log("user id", userId)
-  console.log("private key", privateKey)
+  console.log("private key", encryptedPrivkey)
 
   // create a relay pool
   useEffect(() => {
