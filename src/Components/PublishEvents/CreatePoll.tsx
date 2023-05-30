@@ -33,10 +33,10 @@ export default function CreatePoll({ pool, tags, encryptedPrivkey, events, metad
    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (!window.nostr) {
-         alert("Nostr extension not found");
-         return;
-      }
+      // if (!window.nostr) {
+      //    alert("Nostr extension not found");
+      //    return;
+      // }
 
       // Construct the event object
       const _baseEvent = {
