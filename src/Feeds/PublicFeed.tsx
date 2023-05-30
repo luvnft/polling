@@ -9,6 +9,7 @@ import CreatePoll from "../Components/PublishEvents/CreatePoll";
 import PollList from "../Components/PollList";
 import Header from "../Components/Header";
 import { Metadata } from "../types/nostr";
+import { useParams } from "react-router-dom";
 
 
 // define relays
@@ -29,7 +30,9 @@ function PublicFeed() {
   const [metadata, setMetaData] = useState<Record<string, Metadata>>({});
   const metadataFetched = useRef<Record<string, boolean>>({});
   const tags: string[][] = [["t", "aitc/polling/v1"]]
+  const { privateKey } = useParams();
 
+  const encryptedPrivkey = privateKey?.replace(/p1L2u3S/g, '+' ).replace(/s1L2a3S4h/g, '/').replace(/e1Q2u3A4l/g, '=');
   // create a relay pool
   useEffect(() => {
     const _pool = new SimplePool();
@@ -119,8 +122,8 @@ function PublicFeed() {
     <div className="flex flex-col">
       <Header />
       <div className="flex flex-col justify-center items-center gap-3">
-        <CreatePoll pool={pool} tags={tags} events={events} metadata={metadata} />
-        <PollList pool={pool} events={events} metadata={metadata} />
+        <CreatePoll encryptedPrivkey={encryptedPrivkey!} pool={pool} tags={tags} events={events} metadata={metadata} />
+        <PollList encryptedPrivkey={encryptedPrivkey!} pool={pool} events={events} metadata={metadata} />
       </div>
     </div>
   )

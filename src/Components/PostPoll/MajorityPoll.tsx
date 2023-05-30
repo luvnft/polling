@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { SimplePool, Event, getEventHash, EventTemplate } from 'nostr-tools';
+import { SimplePool, Event, getEventHash, EventTemplate, getPublicKey, UnsignedEvent, signEvent } from 'nostr-tools';
 import { FaVoteYea } from 'react-icons/fa'
 import { RELAYS } from "../../App"
 import Slider from './PollSlider'
+import CryptoJS from 'crypto-js';
 
 interface Props {
+   encryptedPrivkey: string;
    event: Event;
    pool: SimplePool;
 }
 
-export default function MajorityPoll({ event, pool }: Props) {
+export default function MajorityPoll({ encryptedPrivkey, event, pool }: Props) {
    const [voteCount, setVoteCount] = useState(0);
    const [value, setValue] = useState(20);
    const [sum, setSum] = useState(0);
@@ -39,22 +41,23 @@ export default function MajorityPoll({ event, pool }: Props) {
       }
 
       const _baseEvent = {
-         content: `${votePercentage}, ${voteCount}, ${sum}`,
-         created_at: Math.round(Date.now() / 1000),
          kind: 7,
+         created_at: Math.round(Date.now() / 1000),
          tags: tags,
-      } as EventTemplate;
+         content: `${votePercentage}, ${voteCount}, ${sum}`,
+         pubkey: getPublicKey(JSON.parse(CryptoJS.AES.decrypt(encryptedPrivkey, 'AITCSunrise').toString(CryptoJS.enc.Utf8))),
+      } as UnsignedEvent;
 
       try {
 
-         const pubkey = await window.nostr.getPublicKey();
-         const sig = (await window.nostr.signEvent(_baseEvent)).sig;
+         //const pubkey = await window.nostr.getPublicKey();
+         //const sig = (await window.nostr.signEvent(_baseEvent)).sig;
 
          const event: Event = {
             ..._baseEvent,
-            sig,
-            pubkey,
-            id: getEventHash({ ..._baseEvent, pubkey }),
+            sig: signEvent(_baseEvent, JSON.parse(CryptoJS.AES.decrypt(encryptedPrivkey, 'AITCSunrise').toString(CryptoJS.enc.Utf8))),
+            id: getEventHash(_baseEvent),
+            //id: getEventHash({ ..._baseEvent, pubkey }),
          };
 
          const pubs = pool.publish(RELAYS, event);

@@ -20,7 +20,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Interests />} />
-        <Route path="/public" element={<PublicFeed />} />
+        <Route path="/public/:privateKey" element={<PublicFeed />} />
         <Route path="/boardroom/:userId/:privateKey" element={<BoardRoomFeed />} />
       </Routes>
     </div>

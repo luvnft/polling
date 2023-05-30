@@ -34,16 +34,19 @@ function BoardRoomFeed() {
   const { privateKey } = useParams();
   const tags: string[][] = [["t", `aitc/polling/${userId}`]]
 
+  if (!privateKey) {
+    alert("No private key found, cannot interact with feeds");
+  }
+
   {/*
    Key for replacing non characters in the private key
-    ? = /
+    p1L2u3S = +
+    s1L2a3S4h = /
+    e1Q2u3A4l = =
   */}
   
   // TODO: replace all sequenced characters with their appropriate counterparts
-  const encryptedPrivkey = privateKey?.replace(/1/g, 'a');
-
-  console.log("user id", userId)
-  console.log("private key", encryptedPrivkey)
+  const encryptedPrivkey = privateKey?.replace(/p1L2u3S/g, '+' ).replace(/s1L2a3S4h/g, '/').replace(/e1Q2u3A4l/g, '=');
 
   // create a relay pool
   useEffect(() => {
@@ -135,9 +138,9 @@ function BoardRoomFeed() {
     <div className="flex flex-col">
       <Header />
       <div className="flex flex-col justify-center items-center gap-3">
-        <CreatePoll pool={pool} tags={tags} events={events} metadata={metadata} />
+        <CreatePoll pool={pool} tags={tags} encryptedPrivkey={encryptedPrivkey!} events={events} metadata={metadata} />
         <div className="text-2xl font-bold text-black">Welcome to { userId } polls</div>
-        <PollList pool={pool} events={events} metadata={metadata} />
+        <PollList pool={pool} encryptedPrivkey={encryptedPrivkey!} events={events} metadata={metadata} />
       </div>
     </div>
   )

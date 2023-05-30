@@ -6,7 +6,9 @@ import { useMetadata } from '../../utils/use-metadata';
 import ReplyPoll from './ReplyPoll';
 
 
+
 interface Props {
+   encryptedPrivkey: string;
    pool: SimplePool;
    event: {
       id: string;
@@ -15,7 +17,7 @@ interface Props {
 
 }
 
-export default function CommentSection({ pool, event }: Props) {
+export default function CommentSection({ encryptedPrivkey, pool, event }: Props) {
    const [events, setPollReply] = useState<Event[]>([]);
    const [pubkeys, setPubKeys] = useState<string[]>([]);
    let { metadata } = useMetadata({ pubkeys });
@@ -73,7 +75,7 @@ export default function CommentSection({ pool, event }: Props) {
             }
          </div>
          <div>
-            <ReplyPoll pool={pool} event={event} toggleMenu={() => false} rows={1} />
+            <ReplyPoll encryptedPrivkey={encryptedPrivkey} pool={pool} event={event} toggleMenu={() => false} rows={1} />
          </div>
       </div>
    )

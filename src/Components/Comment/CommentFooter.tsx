@@ -6,6 +6,7 @@ import MajorityPoll from "../PostPoll/MajorityPoll";
 import { SimplePool, Event } from 'nostr-tools';
 
 interface Props {
+   encryptedPrivkey: string;
    pool: SimplePool;
    event: Event;
    content: string;
@@ -18,7 +19,7 @@ interface Props {
    hashtags: string[]
 }
 
-export default function CommentFooter({ content, user, created_at, hashtags, pool, event }: Props) {
+export default function CommentFooter({ content, encryptedPrivkey, user, created_at, hashtags, pool, event }: Props) {
 
    const [commentOpen, setCommentOpen] = useState(false);
    const [liked, setLiked] = useState(false);
@@ -31,13 +32,13 @@ export default function CommentFooter({ content, user, created_at, hashtags, poo
    return (
       <div className="flex flex-col border border-t">
          <div className="flex w-full justify-center items-center p-3">
-            <MajorityPoll event={event} pool={pool} />
+            <MajorityPoll encryptedPrivkey={encryptedPrivkey} event={event} pool={pool} />
             <FaComment className='text-black mb-6 ml-20 hover:text-gray-300 cursor-pointer' onClick={() => setCommentOpen(!commentOpen)} />
             {/* <CommentModal event={event} pool={pool} content={content} user={curUser} /> */}
          </div>
          {
             commentOpen ?
-               <CommentSection event={event} pool={pool} /> :
+               <CommentSection encryptedPrivkey={encryptedPrivkey} event={event} pool={pool} /> :
                null
          }
       </div>

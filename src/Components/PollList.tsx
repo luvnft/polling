@@ -3,17 +3,19 @@ import PollCard from "./PollCard";
 import { Metadata } from "../types/nostr";
 
 interface Props {
+   encryptedPrivkey: string;
    pool: SimplePool;
    events: Event[];
    metadata: Record<string, Metadata>;
 }
 
-export default function Poll({ events, metadata, pool }: Props) {
+export default function Poll({ events, encryptedPrivkey, metadata, pool }: Props) {
    return (
       <div className="flex flex-col w-1/2 gap-10">
          {
             events.map((event) => (
                <PollCard
+                  encryptedPrivkey={encryptedPrivkey}
                   event={event}
                   pool={pool}
                   key={event.id}

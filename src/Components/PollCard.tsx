@@ -4,6 +4,7 @@ import CommentFooter from "./Comment/CommentFooter";
 
 
 interface Props {
+   encryptedPrivkey: string;
    pool: SimplePool;
    event: Event;
    content: string;
@@ -16,7 +17,7 @@ interface Props {
    hashtags: string[]
 }
 
-export default function PollCard({ content, user, created_at, hashtags, pool, event }: Props) {
+export default function PollCard({ encryptedPrivkey, content, user, created_at, hashtags, pool, event }: Props) {
 
    const allowedTypes = ["file."];
 
@@ -90,7 +91,7 @@ export default function PollCard({ content, user, created_at, hashtags, pool, ev
                   </li>
                ))}
          </ul> */}
-         <CommentFooter event={event} pool={pool} content={content} user={user} created_at={created_at} hashtags={hashtags} />
+         <CommentFooter event={event} encryptedPrivkey={encryptedPrivkey} pool={pool} content={content} user={user} created_at={created_at} hashtags={hashtags} />
       </div >
    )
 }

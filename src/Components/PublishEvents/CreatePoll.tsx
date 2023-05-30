@@ -1,21 +1,34 @@
 import { useState } from "react";
-import { EventTemplate, Event, getEventHash, SimplePool } from "nostr-tools";
 import { RELAYS } from "../../App";
 import { Metadata } from "../../types/nostr";
 import NostrImg, { UploadResult } from "../../upload/Nostrimg";
 import DropDownMenu from "./DDPollType";
+import CryptoJS from 'crypto-js';
+
+// nostr imports
+import {
+   Event,
+   getEventHash,
+   SimplePool,
+   getPublicKey,
+   signEvent,
+   UnsignedEvent
+} from "nostr-tools";
+
+
+
 
 interface Props {
+   encryptedPrivkey: string;
    pool: SimplePool;
    events: Event[];
    metadata: Record<string, Metadata>;
    tags: string[][];
 }
 
-export default function CreatePoll({ pool, tags, events, metadata }: Props) {
+export default function CreatePoll({ pool, tags, encryptedPrivkey, events, metadata }: Props) {
    const [input, setInput] = useState("");
    const [image, setImage] = useState<UploadResult | null>(null);
-
 
    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -27,41 +40,36 @@ export default function CreatePoll({ pool, tags, events, metadata }: Props) {
 
       // Construct the event object
       const _baseEvent = {
-         content: input,
-         created_at: Math.round(Date.now() / 1000),
          kind: 1,
+         created_at: Math.round(Date.now() / 1000),
          tags: tags,
-      } as EventTemplate;
+         content: input,
+         pubkey: getPublicKey(JSON.parse(CryptoJS.AES.decrypt(encryptedPrivkey, 'AITCSunrise').toString(CryptoJS.enc.Utf8))),
+      } as UnsignedEvent;
 
-      // Sign this event (allow the user to sign it with their private key)
-      // // check if the user has a nostr extension
       try {
-         const pubkey = await window.nostr.getPublicKey();
-
-         const sig = (await window.nostr.signEvent(_baseEvent)).sig;
-
-         const event: Event = {
-            ..._baseEvent,
-            sig,
-            pubkey,
-            id: getEventHash({ ..._baseEvent, pubkey }),
-         };
-
-         const pubs = pool.publish(RELAYS, event);
+         const _event = {
+           ..._baseEvent,
+           sig: signEvent(_baseEvent, JSON.parse(CryptoJS.AES.decrypt(encryptedPrivkey, 'AITCSunrise').toString(CryptoJS.enc.Utf8))),
+           id: getEventHash(_baseEvent),
+         } as Event;
+   
+         if (!pool) return;
+         const pubs = pool.publish(RELAYS, _event);
 
          let clearedInput = false;
-
          pubs.on("ok", () => {
             if (clearedInput) return;
-
             clearedInput = true;
             setInput("");
             setImage(null);
          });
-      } catch (error) {
-         console.log(error)
-         alert("User rejected operation");
-      }
+       } catch (error) {
+         console.log(error);
+         alert("Metadata failed to be published");
+       }
+
+      
    };
 
    async function handleImageSelection(e: any) {
@@ -123,3 +131,36 @@ export default function CreatePoll({ pool, tags, events, metadata }: Props) {
 
    );
 }
+
+
+{/* 
+// Sign this event (allow the user to sign it with their private key)
+      // // check if the user has a nostr extension
+      try {
+         const pubkey = await window.nostr.getPublicKey();
+
+         const sig = (await window.nostr.signEvent(_baseEvent)).sig;
+
+         const event: Event = {
+            ..._baseEvent,
+            sig,
+            pubkey,
+            id: getEventHash({ ..._baseEvent, pubkey }),
+         };
+
+         const pubs = pool.publish(RELAYS, event);
+
+         let clearedInput = false;
+
+         pubs.on("ok", () => {
+            if (clearedInput) return;
+
+            clearedInput = true;
+            setInput("");
+            setImage(null);
+         });
+      } catch (error) {
+         console.log(error)
+         alert("User rejected operation");
+      }
+*/}

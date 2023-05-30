@@ -1,9 +1,11 @@
-import { EventTemplate, getEventHash, SimplePool, Event } from "nostr-tools";
+import { getEventHash, SimplePool, Event, getPublicKey, UnsignedEvent, signEvent } from "nostr-tools";
 import { useState } from "react";
 import { RELAYS } from "../../App";
+import CryptoJS from 'crypto-js';
 
 // the reply takes in an event in order to reply to it
 interface Props {
+   encryptedPrivkey: string;
    pool: SimplePool;
    event: {
       id: string;
@@ -13,7 +15,7 @@ interface Props {
    rows: number;
 }
 
-export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
+export default function ReplyPoll({ encryptedPrivkey, event, pool, toggleMenu, rows }: Props) {
 
    const [pollReply, setPollReply] = useState("");
 
@@ -25,9 +27,8 @@ export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
          return;
       }
       const _baseEvent = {
-         content: pollReply,
-         created_at: Math.round(Date.now() / 1000),
          kind: 1,
+         created_at: Math.round(Date.now() / 1000),
          tags: [
             [
                "e",
@@ -39,21 +40,21 @@ export default function ReplyPoll({ event, pool, toggleMenu, rows }: Props) {
                "p",
                event.pubkey,
             ]
-         ]
-      } as EventTemplate;
+         ],
+         content: pollReply,
+         pubkey: getPublicKey(JSON.parse(CryptoJS.AES.decrypt(encryptedPrivkey, 'AITCSunrise').toString(CryptoJS.enc.Utf8))),
+      } as UnsignedEvent;
 
       try {
 
-         const pubkey = await window.nostr.getPublicKey();
-
-         const sig = (await window.nostr.signEvent(_baseEvent)).sig;
+         //const pubkey = await window.nostr.getPublicKey();
+         //const sig = (await window.nostr.signEvent(_baseEvent)).sig;
 
          const event: Event = {
             ..._baseEvent,
-            sig,
-            pubkey,
-            id: getEventHash({ ..._baseEvent, pubkey }),
-         };
+            sig: signEvent(_baseEvent, JSON.parse(CryptoJS.AES.decrypt(encryptedPrivkey, 'AITCSunrise').toString(CryptoJS.enc.Utf8))),
+            id: getEventHash(_baseEvent),
+         } as Event;
 
          const pubs = pool.publish(RELAYS, event);
 
