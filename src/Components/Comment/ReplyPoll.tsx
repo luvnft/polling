@@ -22,10 +22,10 @@ export default function ReplyPoll({ encryptedPrivkey, event, pool, toggleMenu, r
    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (!window.nostr) {
-         alert("Nostr extension not found");
-         return;
-      }
+      // if (!window.nostr) {
+      //    alert("Nostr extension not found");
+      //    return;
+      // }
       const _baseEvent = {
          kind: 1,
          created_at: Math.round(Date.now() / 1000),

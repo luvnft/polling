@@ -35,10 +35,10 @@ export default function MajorityPoll({ encryptedPrivkey, event, pool }: Props) {
       tags.push(["e", event.id])
       tags.push(["p", event.pubkey])
 
-      if (!window.nostr) {
-         alert("Nostr extension not found");
-         return;
-      }
+      // if (!window.nostr) {
+      //    alert("Nostr extension not found");
+      //    return;
+      // }
 
       const _baseEvent = {
          kind: 7,
