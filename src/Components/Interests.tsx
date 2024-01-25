@@ -10,12 +10,12 @@ export default function Interests() {
 	};
 
 	const interestList: string[] = [
-		"HOUSING",
-		"FASHION",
-		"TECH",
-		"MONEY",
-		"GOV",
-		"FOOD"]
+		"Animals",
+		"Art",
+		"Electronics",
+		"Finance",
+		"Politics",
+		"Travel"]
 
 	return (
 		<div className="flex flex-col justify-center items-center">
